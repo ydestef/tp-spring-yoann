@@ -1,5 +1,8 @@
 package com.example.demo.controllers;
 
+import java.net.URI;
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.domain.Seller;
 import com.example.demo.services.SellerService;
@@ -44,7 +48,7 @@ public class SellerControler {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	//@PostMapping("/post")
+	
 	/*
 	@PutMapping("/")
 	public ResponseEntity<Seller> updateSeller(@RequestBody Seller sellerIn)
@@ -55,6 +59,33 @@ public class SellerControler {
 		//return new ResponseEntity<Seller>()
 	}
 	*/
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateStudent(@RequestBody Seller seller, @PathVariable Long id) {
+
+		Seller sellerOptimal = sellerService.findbyId(id);
+
+		if (sellerOptimal.getId() == null)
+			return ResponseEntity.notFound().build();
+
+		seller.setId(id);
+		
+		sellerService.AddSeller(seller);
+
+		return ResponseEntity.noContent().build();
+	}
+	
+	
+	@PostMapping("/")
+	public ResponseEntity<Object> createStudent(@RequestBody Seller seller) {
+		Seller savedSelled = sellerService.AddSeller(seller);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(savedSelled.getId()).toUri();
+
+		return ResponseEntity.created(location).build();
+
+	}
 	
 	
 	

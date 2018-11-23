@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Product;
+import com.example.demo.domain.Seller;
 import com.example.demo.repositories.ProductRepository;
 
 
@@ -37,5 +38,13 @@ public class ProductService {
 	public String DeleteById(Long id) {		
 		 productRepo.deleteById(id);
 		 return "DELETED";
+	}
+	public Product findbyId(Long id) {
+		return productRepo.findById(id).orElse(new Product());
+	}
+	
+	public Product AddProduct(Product prd) {
+		Product savedProduct = productRepo.save(prd);
+		return savedProduct;
 	}
 }

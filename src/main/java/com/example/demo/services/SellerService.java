@@ -44,5 +44,10 @@ public class SellerService {
 		
 	}
 	
+	public Seller AddSeller(Seller sel) {
+		Seller savedSeller = sellerRepo.save(sel);
+		return savedSeller;
+	}
+	
 
 }
