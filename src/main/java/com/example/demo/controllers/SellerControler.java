@@ -48,18 +48,6 @@ public class SellerControler {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	
-	/*
-	@PutMapping("/")
-	public ResponseEntity<Seller> updateSeller(@RequestBody Seller sellerIn)
-	{
-		Seller sellerOut = new Seller();
-		BeanUtils.copyProperties(sellerIn,sellerOut);
-		
-		//return new ResponseEntity<Seller>()
-	}
-	*/
-	
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> updateStudent(@RequestBody Seller seller, @PathVariable Long id) {
 
