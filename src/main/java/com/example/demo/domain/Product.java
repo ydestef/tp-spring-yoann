@@ -1,8 +1,7 @@
 package com.example.demo.domain;
 
 import java.util.Date;
-//java.Util ?
-import java.util.List;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
